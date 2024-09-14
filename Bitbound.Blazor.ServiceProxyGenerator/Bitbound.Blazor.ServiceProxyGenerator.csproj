@@ -4,6 +4,19 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Authors>Jared Goodwin</Authors>
+    <Title>Service Proxy Generator</Title>
+    <Description>
+      A dependency injection helper for Blazor that registers service proxies in the non-target render context.
+    </Description>
+    <Copyright>(c) Jared Goodwin 2024</Copyright>
+    <PackageProjectUrl>https://github.com/bitbound/ServiceProxyGenerator</PackageProjectUrl>
+    <PackageIcon>bitbound.png</PackageIcon>
+    <RepositoryUrl>https://github.com/bitbound/ServiceProxyGenerator</RepositoryUrl>
+    <PackageTags>blazor;</PackageTags>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
