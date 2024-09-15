@@ -15,7 +15,7 @@ on:
         description: "Is Prerelease"
         type: boolean
         required: true
-        default: true
+        default: false
 
 permissions: write-all
 
