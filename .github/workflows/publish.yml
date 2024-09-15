@@ -3,6 +3,9 @@ name: Publish NuGet Package
 on:
   push:
     branches: ["main"]
+    paths-ignore: 
+      - "README.md"
+      - ".editorconfig"
   pull_request:
     branches: ["main"]
   workflow_dispatch:
@@ -22,7 +25,7 @@ jobs:
       registryApiKey: ${{ secrets.NUGET_API_KEY }}
     with:
       projectOrSlnDir: "./Bitbound.Blazor.ServiceProxyGenerator"
-      prerelease: "${{ inputs.prerelease || github.event_name != 'workflow_dispatch' }}"
+      prerelease: true
       majorVersion: 1
       minorVersion: 0
       runTests: true
