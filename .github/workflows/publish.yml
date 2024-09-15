@@ -28,5 +28,5 @@ jobs:
       projectOrSlnDir: "./Bitbound.Blazor.ServiceProxyGenerator"
       prerelease: false
       majorVersion: 1
-      minorVersion: 1
+      minorVersion: 2
       runTests: true

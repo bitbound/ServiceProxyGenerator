@@ -162,8 +162,8 @@ public static class IServiceCollectionExtensions
 
     public static IServiceCollection AddContextAwareScoped<TService>(
         this IServiceCollection services,
-        Func<IServiceProvider, TService> implementationFactory,
-        RenderContext renderContext)
+        RenderContext renderContext,
+        Func<IServiceProvider, TService> implementationFactory)
         where TService : class
     {
         if (RegisterActual(renderContext))
@@ -216,8 +216,8 @@ public static class IServiceCollectionExtensions
 
     public static IServiceCollection AddContextAwareSingleton<TService>(
         this IServiceCollection services,
-        Func<IServiceProvider, TService> implementationFactory,
-        RenderContext renderContext)
+        RenderContext renderContext,
+        Func<IServiceProvider, TService> implementationFactory)
         where TService : class
     {
         if (RegisterActual(renderContext))
@@ -252,8 +252,8 @@ public static class IServiceCollectionExtensions
 
     public static IServiceCollection AddContextAwareTransient<TService>(
         this IServiceCollection services,
-        Func<IServiceProvider, TService> implementationFactory,
-        RenderContext renderContext)
+        RenderContext renderContext,
+        Func<IServiceProvider, TService> implementationFactory)
         where TService : class
     {
         if (RegisterActual(renderContext))
