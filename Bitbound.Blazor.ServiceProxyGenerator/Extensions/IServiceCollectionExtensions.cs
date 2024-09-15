@@ -5,23 +5,6 @@ namespace Bitbound.Blazor.ServiceProxyGenerator.Extensions;
 
 public static class IServiceCollectionExtensions
 {
-    public static IServiceCollection AddContextAwareKeyedScoped<TService>(
-        this IServiceCollection services,
-        RenderContext renderContext,
-        object serviceKey)
-        where TService : class
-    {
-        if (RegisterActual(renderContext))
-        {
-            services.AddKeyedScoped<TService>(serviceKey);
-        }
-        else
-        {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
-            services.AddKeyedScoped(serviceKey, (_, _) => proxy);
-        }
-        return services;
-    }
 
     public static IServiceCollection AddContextAwareKeyedScoped<TService, TImplementation>(
         this IServiceCollection services,
@@ -42,6 +25,7 @@ public static class IServiceCollectionExtensions
         return services;
     }
 
+
     public static IServiceCollection AddContextAwareKeyedScoped<TService>(
         this IServiceCollection services,
         RenderContext renderContext,
@@ -61,15 +45,16 @@ public static class IServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddContextAwareKeyedSingleton<TService>(
-       this IServiceCollection services,
-       RenderContext renderContext,
-       object serviceKey)
-       where TService : class
+    public static IServiceCollection AddContextAwareKeyedSingleton<TService, TImplementation>(
+        this IServiceCollection services,
+        RenderContext renderContext,
+        object serviceKey)
+        where TService : class
+        where TImplementation : class, TService
     {
         if (RegisterActual(renderContext))
         {
-            services.AddKeyedSingleton<TService>(serviceKey);
+            services.AddKeyedSingleton<TService, TImplementation>(serviceKey);
         }
         else
         {
@@ -82,13 +67,14 @@ public static class IServiceCollectionExtensions
     public static IServiceCollection AddContextAwareKeyedSingleton<TService, TImplementation>(
         this IServiceCollection services,
         RenderContext renderContext,
-        object serviceKey)
+        object serviceKey,
+        TService instance)
         where TService : class
         where TImplementation : class, TService
     {
         if (RegisterActual(renderContext))
         {
-            services.AddKeyedSingleton<TService, TImplementation>(serviceKey);
+            services.AddKeyedSingleton(serviceKey, instance);
         }
         else
         {
@@ -117,23 +103,6 @@ public static class IServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddContextAwareKeyedTransient<TService>(
-        this IServiceCollection services,
-        RenderContext renderContext,
-        object serviceKey)
-        where TService : class
-    {
-        if (RegisterActual(renderContext))
-        {
-            services.AddKeyedTransient<TService>(serviceKey);
-        }
-        else
-        {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
-            services.AddKeyedTransient(serviceKey, (_, _) => proxy);
-        }
-        return services;
-    }
 
     public static IServiceCollection AddContextAwareKeyedTransient<TService, TImplementation>(
         this IServiceCollection services,
@@ -169,23 +138,6 @@ public static class IServiceCollectionExtensions
         {
             var proxy = ProxyServiceGenerator.CreateProxy<TService>();
             services.AddKeyedTransient(serviceKey, (_, _) => proxy);
-        }
-        return services;
-    }
-
-    public static IServiceCollection AddContextAwareScoped<TService>(
-        this IServiceCollection services,
-        RenderContext renderContext)
-        where TService : class
-    {
-        if (RegisterActual(renderContext))
-        {
-            services.AddScoped<TService>();
-        }
-        else
-        {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
-            services.AddScoped(_ => proxy);
         }
         return services;
     }
@@ -227,13 +179,14 @@ public static class IServiceCollectionExtensions
     }
 
     public static IServiceCollection AddContextAwareSingleton<TService>(
-                                                        this IServiceCollection services,
-    RenderContext renderContext)
-    where TService : class
+        this IServiceCollection services,
+        RenderContext renderContext,
+        TService instance)
+        where TService : class
     {
         if (RegisterActual(renderContext))
         {
-            services.AddSingleton<TService>();
+            services.AddSingleton(instance);
         }
         else
         {
@@ -275,23 +228,6 @@ public static class IServiceCollectionExtensions
         {
             var proxy = ProxyServiceGenerator.CreateProxy<TService>();
             services.AddSingleton(_ => proxy);
-        }
-        return services;
-    }
-
-    public static IServiceCollection AddContextAwareTransient<TService>(
-        this IServiceCollection services,
-        RenderContext renderContext)
-        where TService : class
-    {
-        if (RegisterActual(renderContext))
-        {
-            services.AddTransient<TService>();
-        }
-        else
-        {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
-            services.AddTransient(_ => proxy);
         }
         return services;
     }
