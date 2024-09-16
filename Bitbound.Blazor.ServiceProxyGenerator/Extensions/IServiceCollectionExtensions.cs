@@ -45,6 +45,7 @@ public static class IServiceCollectionExtensions
         return services;
     }
 
+
     public static IServiceCollection AddContextAwareKeyedScoped<TService>(
         this IServiceCollection services,
         RenderContext renderContext,
@@ -64,15 +65,16 @@ public static class IServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddContextAwareKeyedSingleton<TService>(
-       this IServiceCollection services,
-       RenderContext renderContext,
-       object serviceKey)
-       where TService : class
+    public static IServiceCollection AddContextAwareKeyedSingleton<TService, TImplementation>(
+        this IServiceCollection services,
+        RenderContext renderContext,
+        object serviceKey)
+        where TService : class
+        where TImplementation : class, TService
     {
         if (RegisterActual(renderContext))
         {
-            services.AddKeyedSingleton<TService>(serviceKey);
+            services.AddKeyedSingleton<TService, TImplementation>(serviceKey);
         }
         else
         {
@@ -85,13 +87,14 @@ public static class IServiceCollectionExtensions
     public static IServiceCollection AddContextAwareKeyedSingleton<TService, TImplementation>(
         this IServiceCollection services,
         RenderContext renderContext,
-        object serviceKey)
+        object serviceKey,
+        TService instance)
         where TService : class
         where TImplementation : class, TService
     {
         if (RegisterActual(renderContext))
         {
-            services.AddKeyedSingleton<TService, TImplementation>(serviceKey);
+            services.AddKeyedSingleton(serviceKey, instance);
         }
         else
         {
@@ -213,8 +216,8 @@ public static class IServiceCollectionExtensions
 
     public static IServiceCollection AddContextAwareScoped<TService>(
         this IServiceCollection services,
-        Func<IServiceProvider, TService> implementationFactory,
-        RenderContext renderContext)
+        RenderContext renderContext,
+        Func<IServiceProvider, TService> implementationFactory)
         where TService : class
     {
         if (RegisterActual(renderContext))
@@ -230,13 +233,14 @@ public static class IServiceCollectionExtensions
     }
 
     public static IServiceCollection AddContextAwareSingleton<TService>(
-                                                        this IServiceCollection services,
-    RenderContext renderContext)
-    where TService : class
+        this IServiceCollection services,
+        RenderContext renderContext,
+        TService instance)
+        where TService : class
     {
         if (RegisterActual(renderContext))
         {
-            services.AddSingleton<TService>();
+            services.AddSingleton(instance);
         }
         else
         {
@@ -266,8 +270,8 @@ public static class IServiceCollectionExtensions
 
     public static IServiceCollection AddContextAwareSingleton<TService>(
         this IServiceCollection services,
-        Func<IServiceProvider, TService> implementationFactory,
-        RenderContext renderContext)
+        RenderContext renderContext,
+        Func<IServiceProvider, TService> implementationFactory)
         where TService : class
     {
         if (RegisterActual(renderContext))
@@ -319,8 +323,8 @@ public static class IServiceCollectionExtensions
 
     public static IServiceCollection AddContextAwareTransient<TService>(
         this IServiceCollection services,
-        Func<IServiceProvider, TService> implementationFactory,
-        RenderContext renderContext)
+        RenderContext renderContext,
+        Func<IServiceProvider, TService> implementationFactory)
         where TService : class
     {
         if (RegisterActual(renderContext))

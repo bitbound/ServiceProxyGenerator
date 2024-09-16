@@ -3,14 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bitbound.Blazor.ServiceProxyGenerator", "Bitbound.Blazor.ServiceProxyGenerator\Bitbound.Blazor.ServiceProxyGenerator.csproj", "{53B7BF78-9DA0-416F-A06D-12F445062E4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bitbound.Blazor.ServiceProxyGenerator", "Bitbound.Blazor.ServiceProxyGenerator\Bitbound.Blazor.ServiceProxyGenerator.csproj", "{53B7BF78-9DA0-416F-A06D-12F445062E4C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5E0A1305-E8AD-44F3-9E50-9DA9D8622597}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bitbound.Blazor.ServiceProxyGenerator.Tests", "Bitbound.Blazor.ServiceProxyGenerator.Tests\Bitbound.Blazor.ServiceProxyGenerator.Tests.csproj", "{513492DD-A2CA-45A0-A78B-B47660530EB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bitbound.Blazor.ServiceProxyGenerator.Tests", "Bitbound.Blazor.ServiceProxyGenerator.Tests\Bitbound.Blazor.ServiceProxyGenerator.Tests.csproj", "{513492DD-A2CA-45A0-A78B-B47660530EB9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{6284BAE4-9811-4CC7-A4E3-2A57D2E697F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{6754F246-7579-4CB9-B2AF-21C6CF4C4413}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\publish.yml = .github\workflows\publish.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +36,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6284BAE4-9811-4CC7-A4E3-2A57D2E697F8} = {5E0A1305-E8AD-44F3-9E50-9DA9D8622597}
+		{6754F246-7579-4CB9-B2AF-21C6CF4C4413} = {6284BAE4-9811-4CC7-A4E3-2A57D2E697F8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5F3FCA3D-38E2-4CEF-B2A6-A2D36BA54363}

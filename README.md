@@ -7,7 +7,7 @@ proxies will be injected during server-side prerendering.
 
 ## Quick Start (recommended usage)
 
-````C#
+```C#
 // In the Blazor Client project.
 public static class IServiceCollectionExtensions
 {
@@ -20,11 +20,12 @@ public static class IServiceCollectionExtensions
     // ... Add all services this way.
   }
 }
+```
 
 ```C#
   // In Program.cs in the Blazor Client project;
   builder.Services.AddClientServices();
-````
+```
 
 ```C#
   // In Program.cs in the Blazor Server project;
