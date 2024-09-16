@@ -1,10 +1,14 @@
 ﻿using Bitbound.Blazor.ServiceProxyGenerator.Internals;
+using Castle.DynamicProxy;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bitbound.Blazor.ServiceProxyGenerator.Extensions;
 
 public static class IServiceCollectionExtensions
 {
+    private readonly static Interceptor _interceptor = new();
+    private readonly static ProxyGenerator _proxyGenerator = new();
+
     public static IServiceCollection AddContextAwareKeyedScoped<TService>(
         this IServiceCollection services,
         RenderContext renderContext,
@@ -17,12 +21,11 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddKeyedScoped(serviceKey, (_, _) => proxy);
         }
         return services;
     }
-
     public static IServiceCollection AddContextAwareKeyedScoped<TService, TImplementation>(
         this IServiceCollection services,
         RenderContext renderContext,
@@ -36,7 +39,7 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddKeyedScoped(serviceKey, (_, _) => proxy);
         }
         return services;
@@ -55,7 +58,7 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddKeyedScoped(serviceKey, (_, _) => proxy);
         }
         return services;
@@ -73,7 +76,7 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddKeyedSingleton(serviceKey, (_, _) => proxy);
         }
         return services;
@@ -92,7 +95,7 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddKeyedSingleton(serviceKey, (_, _) => proxy);
         }
         return services;
@@ -111,7 +114,7 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddKeyedSingleton(serviceKey, (_, _) => proxy);
         }
         return services;
@@ -129,7 +132,7 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddKeyedTransient(serviceKey, (_, _) => proxy);
         }
         return services;
@@ -148,7 +151,7 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddKeyedTransient(serviceKey, (_, _) => proxy);
         }
         return services;
@@ -167,7 +170,7 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddKeyedTransient(serviceKey, (_, _) => proxy);
         }
         return services;
@@ -184,7 +187,7 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddScoped(_ => proxy);
         }
         return services;
@@ -202,7 +205,7 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddScoped(_ => proxy);
         }
         return services;
@@ -220,7 +223,7 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddScoped(_ => proxy);
         }
         return services;
@@ -237,7 +240,7 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddSingleton(_ => proxy);
         }
         return services;
@@ -255,7 +258,7 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddSingleton(_ => proxy);
         }
         return services;
@@ -273,7 +276,7 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddSingleton(_ => proxy);
         }
         return services;
@@ -290,7 +293,7 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddTransient(_ => proxy);
         }
         return services;
@@ -308,7 +311,7 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddTransient(_ => proxy);
         }
         return services;
@@ -326,7 +329,7 @@ public static class IServiceCollectionExtensions
         }
         else
         {
-            var proxy = ProxyServiceGenerator.CreateProxy<TService>();
+            var proxy = _proxyGenerator.CreateInterfaceProxyWithoutTarget<TService>(_interceptor);
             services.AddTransient(_ => proxy);
         }
         return services;
@@ -337,5 +340,15 @@ public static class IServiceCollectionExtensions
         return OperatingSystem.IsBrowser() ?
             renderContext == RenderContext.Browser :
             renderContext == RenderContext.Server;
+    }
+
+    private class Interceptor : IInterceptor
+    {
+        public void Intercept(IInvocation invocation)
+        {
+            throw new NotImplementedException(
+                "This service is a stub and has no implementation.  " +
+                "Make sure you are in the correct Blazor render context (e.g. server/WASM).");
+        }
     }
 }

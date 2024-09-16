@@ -37,6 +37,8 @@ public class ProxyServiceTests
         var services = collection.BuildServiceProvider();
         var testService = services.GetRequiredService<ITestService>();
 
+        Assert.Throws<NotImplementedException>(() => testService.DoVoid());
+
         Assert.Throws<NotImplementedException>(() => testService.GetValue());
 
         Assert.ThrowsAsync<NotImplementedException>(() => testService.QueryNumber());

@@ -2,6 +2,7 @@
 
 public interface ITestService
 {
+    void DoVoid();
     string GetValue();
     Task SetValue(string value);
     IAsyncEnumerable<int> ReadNumbers();
@@ -10,6 +11,11 @@ public interface ITestService
 
 public class TestService : ITestService
 {
+    public void DoVoid()
+    {
+        Console.WriteLine("Ok");
+    }
+
     public string GetValue()
     {
         return "Ok";
